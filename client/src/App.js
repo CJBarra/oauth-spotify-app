@@ -5,13 +5,13 @@ import './App.css';
 
 function App() {
   useEffect(() => {
-    // pull and store access & refresh tokens from URL
+    // pull and store OAuth access & refresh tokens from URL
     const qs = window.location.search
     const urlParams = new URLSearchParams(qs)
     const accessToken = urlParams.get('access_token')
     const refreshToken = urlParams.get('refresh_token')
 
-    // token expired => retrieve new from '/refresh_token' endpoint in express app
+    // OAuth token expired => retrieve new from '/refresh_token' endpoint in express app
     if (refreshToken) {
       fetch(`/refresh_token?refresh_token=${refreshToken}`)
         .then(res => res.json())
@@ -19,7 +19,6 @@ function App() {
         .catch(err => console.error(err))
         // proxy set for 'cors' resolution in package.json
     }
-
   }, [])
 
 
