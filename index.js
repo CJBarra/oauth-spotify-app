@@ -40,6 +40,7 @@ app.get('/login', (req, res) => {
 
   res.cookie(stateKey, state)
 
+  // redirect to Spotify Accounts Service for login
   res.redirect('https://accounts.spotify.com/authorize?' + querystring.stringify({
     response_type: 'code',
     client_id: CLIENT_ID,
@@ -51,7 +52,6 @@ app.get('/login', (req, res) => {
 
 app.get('/callback', (req, res) => {
   const code = req.query.code || null;
-  const state = req.query.state || null;
 
   axios({
     method: 'post',
@@ -68,33 +68,19 @@ app.get('/callback', (req, res) => {
   })
     .then(response => {
       if (response.status === 200) {
-        const { access_token, token_type } = response.data;
+        // On successful Login, redirect to react app
+        const { access_token, refresh_token } = response.data;
+        
+        const queryParams = querystring.stringify({
+          access_token,
+          refresh_token
+        })
 
-        // get current user's profile
-        // axios.get('https://api.spotify.com/v1/me', {
-        //   headers: {
-        //     Authorization: `${token_type} ${access_token}`
-        //   }
-        // })
-        //   .then(response => {
-        //     res.send(`<pre>${JSON.stringify(response.data, null, 2)}</pre>`)
-        //   })
-        //   .catch(error => {
-        //     res.send(error)
-        //   })
-
-        const { refresh_token } = response.data;
-
-        axios.get(`http://localhost:8000/refresh_token?refresh_token=${refresh_token}`)
-          .then(response => {
-            res.send(`<pre>${JSON.stringify(response.data, null, 2)}</pre>`);
-          })
-          .catch(error => {
-            res.send(error);
-          });
+        // pass access and refresh tokens from Spotify Account Service in query params
+        res.redirect(`http://localhost:3000/?${queryParams}`)
 
       } else {
-        res.send(response)
+        res.redirect(`/?${querystring.stringify({ error: 'invalid token' })}`)
       }
     })
     .catch(error => {
