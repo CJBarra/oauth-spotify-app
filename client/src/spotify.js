@@ -36,8 +36,8 @@ const isTokenExpired = () => {
  */
 export const logout = () => {
   // loop through localStorage items and remove properties
-  for (const keysProp in LOCALSTORAGE_KEYS) {
-    window.localStorage.removeItem(LOCALSTORAGE_KEYS[keysProp]);
+  for (const keyProps in LOCALSTORAGE_KEYS) {
+    window.localStorage.removeItem(LOCALSTORAGE_KEYS[keyProps]);
   }
 
   // redirect to homepage
@@ -128,3 +128,20 @@ const getAccessToken = () => {
 
 // exports
 export const accessToken = getAccessToken();
+
+
+/**
+ * Set axios global default request headers
+ * https://axios-http.com/docs/config_defaults
+ * 
+ */
+axios.defaults.baseURL = 'https://api.spotify.com/v1';
+axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`; // OAuth token from localStorage
+axios.defaults.headers.post['Content-Type'] = 'application/json';
+
+
+/**
+ * Get current User Profile
+ * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-current-users-profile
+ */
+export const getCurrentUserProfile = () => axios.get('/me');
