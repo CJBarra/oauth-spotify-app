@@ -13,6 +13,6 @@ const TopArtists = () => {
 export default TopArtists
 
 const Styledh1 = styled.h1`
-  color: red;
+ 
 `
 

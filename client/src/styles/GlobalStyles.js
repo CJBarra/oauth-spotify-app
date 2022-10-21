@@ -26,6 +26,7 @@ const GlobalStyle = createGlobalStyle`
   h1, h2, h3, h4, h5, h6 {
     margin: 0 0 10px;
     letter-spacing: -0.04em;
+    color: var(--font-white);
   }
 
   a, button {

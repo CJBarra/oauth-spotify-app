@@ -8,7 +8,7 @@ import styled from 'styled-components/macro';
 
 import TopArtists from './components/TopArtists';
 import TopTracks from './components/TopTracks';
-import PlaylistsById from './components/PlaylistsById';
+import PlaylistById from './components/PlaylistById';
 import Playlists from './components/Playlists';
 
 
@@ -53,7 +53,7 @@ function App() {
             <Routes>
               <Route path='/top-artists' element={<TopArtists />} />
               <Route path='/top-tracks' element={<TopTracks />} />
-              <Route path='/playlists/:id' element={<PlaylistsById />} />
+              <Route path='/playlist/:id' element={<PlaylistById />} />
               <Route path='/playlists' element={<Playlists />} />
               <Route path='/' element={<UserProfile />} />
             </Routes>

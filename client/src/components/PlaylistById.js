@@ -1,6 +1,6 @@
 import React from 'react'
 
-const PlaylistsById = () => {
+const PlaylistById = () => {
   return (
     <>
       <h1>Playlist</h1>
@@ -8,4 +8,4 @@ const PlaylistsById = () => {
   )
 }
 
-export default PlaylistsById
+export default PlaylistById
