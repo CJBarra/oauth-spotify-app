@@ -3,9 +3,13 @@ import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 
 import { accessToken, logout, getCurrentUserProfile } from './spotify';
 import { catchErrors } from './utils';
+import { GlobalStyle } from './styles';
+import styled from 'styled-components/macro';
 
-import styled, { createGlobalStyle } from 'styled-components/macro';
 import TopArtists from './components/TopArtists';
+import TopTracks from './components/TopTracks';
+import PlaylistsById from './components/PlaylistsById';
+import Playlists from './components/Playlists';
 
 
 function ScrollToTop() {
@@ -59,29 +63,6 @@ function App() {
     </div>
   );
 
-  function TopTracks() {
-    return (
-      <>
-        <h1>Top Tracks</h1>
-      </>
-    )
-  }
-
-  function PlaylistsById() {
-    return (
-      <>
-        <h1>Playlist</h1>
-      </>
-    )
-  }
-
-  function Playlists() {
-    return (
-      <>
-        <h1>Playlists</h1>
-      </>
-    )
-  }
 
   function UserProfile() {
     return (
@@ -107,35 +88,18 @@ export default App;
 
 
 const StyledLoginButton = styled.a`
-  background-color: #1ed760;
+  background-color: var(--accent-color);
   display: inline-block;
   padding: 10px 20px;
   margin: 20px auto;
   border-radius: 20px;
   
-  color: #000;
+  color: var(--font-Dark);
   font-weight: 600;
   text-transform: uppercase;
   text-decoration: none;
 
   &:hover {
-    background-color: #1ee665;
-  }
-`
-
-const GlobalStyle = createGlobalStyle`
-  html {
-    box-sizing: border-box;
-  }
-
-  *,  *::before, *::after {
-    box-sizing: inherit;
-  }
-
-  body {
-    margin: 0;
-    padding: 0;
-    background-color: #1e1e1e;
-    color: #eee;
+    background-color: var(--accent-highlight);
   }
 `
