@@ -1,15 +1,12 @@
 import { useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
-
-import { accessToken, logout, getCurrentUserProfile } from './spotify';
-import { catchErrors } from './utils';
-import { GlobalStyle } from './styles';
 import styled from 'styled-components/macro';
 
-import TopArtists from './components/TopArtists';
-import TopTracks from './components/TopTracks';
-import PlaylistById from './components/PlaylistById';
-import Playlists from './components/Playlists';
+import { accessToken, logout } from './spotify';
+import { GlobalStyle } from './styles';
+
+// pages
+import { Login, PlaylistById, Playlists, Profile, TopArtists, TopTracks } from './pages';
 
 
 function ScrollToTop() {
@@ -24,19 +21,10 @@ function ScrollToTop() {
 
 function App() {
   const [token, setToken] = useState(null)
-  const [profile, setProfile] = useState(null)
 
   useEffect(() => {
     // get OAuth access token from URL, then, set setToken state
     setToken(accessToken)
-
-    // await response from getCurrentUserProfile, then, set setProfile state variable
-    const fetchData = async () => {
-      const { data } = await getCurrentUserProfile()
-      setProfile(data)
-    }
-
-    catchErrors(fetchData())
   }, [])
 
   return (
@@ -44,62 +32,41 @@ function App() {
       <GlobalStyle />
       <header className="App-header">
         {!token ? (
-          <StyledLoginButton href="http://localhost:8000/login">
-            Log in
-          </StyledLoginButton>
+          <Login />
         ) : (
-          <BrowserRouter >
-            <ScrollToTop />
-            <Routes>
-              <Route path='/top-artists' element={<TopArtists />} />
-              <Route path='/top-tracks' element={<TopTracks />} />
-              <Route path='/playlist/:id' element={<PlaylistById />} />
-              <Route path='/playlists' element={<Playlists />} />
-              <Route path='/' element={<UserProfile />} />
-            </Routes>
-          </BrowserRouter>
+          <>
+            <StyledLogoutButton onClick={logout}>Log Out</StyledLogoutButton>
+
+            <BrowserRouter >
+              <ScrollToTop />
+              <Routes>
+                <Route path='/top-artists' element={<TopArtists />} />
+                <Route path='/top-tracks' element={<TopTracks />} />
+                <Route path='/playlist/:id' element={<PlaylistById />} />
+                <Route path='/playlists' element={<Playlists />} />
+                <Route path='/' element={<Profile />} />
+              </Routes>
+            </BrowserRouter>
+          </>
         )}
       </header>
     </div>
   );
-
-
-  function UserProfile() {
-    return (
-      <>
-        <button onClick={logout}>Log Out</button>
-
-        {profile && (
-          <div>
-            <h1>{profile.display_name}</h1>
-            <p>{profile.followers.total} Followers</p>
-
-            {profile.images.length && profile.images[0].url && (
-              <img src={profile.images[0].url} alt='Avatar' />
-            )}
-          </div>
-        )}
-      </>
-    )
-  }
-
-} // app() end
+}
 export default App;
 
 
-const StyledLoginButton = styled.a`
-  background-color: var(--accent-color);
-  display: inline-block;
-  padding: 10px 20px;
-  margin: 20px auto;
-  border-radius: 20px;
-  
-  color: var(--font-Dark);
-  font-weight: 600;
-  text-transform: uppercase;
-  text-decoration: none;
+const StyledLogoutButton = styled.button`
+  background-color: var(--dark-grey);
+  position: absolute;
+  top: var(--sm);
+  right: var(--md);
+  padding: var(--xs) var(--sm);
+  z-index: 10;
 
-  &:hover {
-    background-color: var(--accent-highlight);
+  font-size: 14px;
+
+  @media (min-width: 768px) {
+    right: var(--lg);
   }
 `

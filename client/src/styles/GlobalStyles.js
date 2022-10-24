@@ -24,8 +24,8 @@ const GlobalStyle = createGlobalStyle`
   }
 
   h1, h2, h3, h4, h5, h6 {
-    margin: 0 0 10px;
-    letter-spacing: -0.04em;
+    margin: 0 0 var(--sm);
+    letter-spacing: -0.02em;
     color: var(--font-white);
   }
 
@@ -39,10 +39,10 @@ const GlobalStyle = createGlobalStyle`
   }
 
   button {
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: var(--dark-grey-faded);
     border: 0;
-    border-radius: 20px;
-    padding: 8px 10px;
+    border-radius: var(--lg);
+    padding: var(--xs) var(--sm);
     font-weight: 600;
     font-family: inherit;
     color: var(--font-white);

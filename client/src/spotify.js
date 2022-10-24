@@ -8,6 +8,7 @@ const LOCALSTORAGE_KEYS = {
   timestamp: 'spotify_token_timestamp',
 }
 
+
 // GET localStorage key values
 const LOCALSTORAGE_VALUES = {
   accessToken: window.localStorage.getItem(LOCALSTORAGE_KEYS.accessToken),
@@ -15,20 +16,6 @@ const LOCALSTORAGE_VALUES = {
   expireTime: window.localStorage.getItem(LOCALSTORAGE_KEYS.expireTime),
   timestamp: window.localStorage.getItem(LOCALSTORAGE_KEYS.timestamp),
 }
-
-// is current token elapsed time >= token expireTime
-const isTokenExpired = () => {
-  const { accessToken, timestamp, expireTime } = LOCALSTORAGE_VALUES;
-
-  if (!accessToken || !timestamp) {
-    return false;
-  }
-
-  // Spotify token default expire time = 3600s. (1 hour)
-  const millisecondElapsed = Date.now() - Number(timestamp);
-  return (millisecondElapsed / 1000) > Number(expireTime);
-}
-
 
 /**
  * Clear localStorage items, then navigate to homepage.
@@ -42,6 +29,20 @@ export const logout = () => {
 
   // redirect to homepage
   window.location = window.location.origin;
+}
+
+
+// is current token elapsed time >= token expireTime
+const isTokenExpired = () => {
+  const { accessToken, timestamp, expireTime } = LOCALSTORAGE_VALUES;
+
+  if (!accessToken || !timestamp) {
+    return false;
+  }
+
+  // Spotify token default expire time = 3600s. (1 hour)
+  const millisecondElapsed = Date.now() - Number(timestamp);
+  return (millisecondElapsed / 1000) > Number(expireTime);
 }
 
 
@@ -126,8 +127,33 @@ const getAccessToken = () => {
 }
 
 
-// exports
 export const accessToken = getAccessToken();
+
+/**
+ * Get current User Profile
+ * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-current-users-profile
+ * @returns {Promise}
+ */
+export const getCurrentUserProfile = () => axios.get('/me');
+
+/**
+ * Get a list of the playlists owned or followed by the current Spotify user.
+ * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-a-list-of-current-users-playlists
+ * @returns {Promise}
+ */
+export const getCurrentUserPlaylists = (limit = 20) => {
+  return axios.get(`/me/playlists?limit=${limit}`);
+};
+
+/**
+ * Get the current user's top artists or tracks based on calculated affinity.
+ * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-users-top-artists-and-tracks
+ * @param {string} time_range - Valid values: long_term (calculated from several years of data and including all new data as it becomes available), medium_term (approximately last 6 months), short_term (approximately last 4 weeks). Default: medium_term
+ * @returns {Promise}
+ */
+export const getTopArtists = (time_range = 'short_term') => {
+  return axios.get(`/me/top/artists?time_range=${time_range}`);
+}
 
 
 /**
@@ -138,10 +164,3 @@ export const accessToken = getAccessToken();
 axios.defaults.baseURL = 'https://api.spotify.com/v1';
 axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`; // OAuth token from localStorage
 axios.defaults.headers.post['Content-Type'] = 'application/json';
-
-
-/**
- * Get current User Profile
- * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-current-users-profile
- */
-export const getCurrentUserProfile = () => axios.get('/me');

@@ -34,11 +34,21 @@ app.get('/', (req, res) => {
 })
 
 app.get('/login', (req, res) => {
-  const scope = 'user-read-private user-read-email'
-  const stateKey = 'spotify_auth_state'
-  const state = generateRandomString(16)
-
+  const stateKey = 'spotify_auth_state';
+  const state = generateRandomString(16);
   res.cookie(stateKey, state)
+
+  /**
+   * required scopes for third-party apps
+   * https://developer.spotify.com/documentation/general/guides/authorization/scopes/#playlist-read-private
+   * @param {string}
+   */
+   const scope = [
+    'user-read-private',
+    'user-read-email',
+    'playlist-read-private',
+    'user-top-read',
+  ].join(' ');
 
   // redirect to Spotify Accounts Service for login
   res.redirect('https://accounts.spotify.com/authorize?' + querystring.stringify({

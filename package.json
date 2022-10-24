@@ -1,7 +1,7 @@
 {
   "name": "oauth-spotify-app",
   "version": "1.0.0",
-  "description": "Full-stack web application integrating the Spotify Web API. Addressing the Spotify OAuth Flow.",
+  "description": "Full-stack web application, following the Spotify OAuth Flow. Re-creating a logged in users profile page by use of the Spotify Web API.",
   "main": "index.js",
   "scripts": {
     "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
