@@ -14,7 +14,8 @@ const StyledTrackList = styled.ul`
     border-radius: var(--rad-rounded);
 
     color: var(--font-light-grey);
-    font-size: 0.75rem;
+    font-size: 0.833rem;
+    font-weight: 600;
     transition: background-color 250ms ease;
 
     @media (min-width: 768px) {
@@ -39,7 +40,6 @@ const StyledTrackList = styled.ul`
   }
 
   .track__item__name-artist {
-    font-weight: 600;
     align-self: flex-end;
   }
   
@@ -62,7 +62,6 @@ const StyledTrackList = styled.ul`
   }
 
   .track__item__artist {
-    font-size: 0.85rem;
     transition: all 250ms ease;
 
     span {
