@@ -1,6 +1,6 @@
 import { StyledGrid } from '../styles';
 
-const ArtistsGrid = ({ artists }) => (
+const ArtistsGrid = ({ artists, label }) => (
   <>
     {artists && artists.length ? (
       <StyledGrid type="artist">
@@ -13,13 +13,13 @@ const ArtistsGrid = ({ artists }) => (
                 </div>
               )}
               <h3 className="grid__item__name overflow-ellipsis">{artist.name}</h3>
-              <p className="grid__item_label">Artist</p>
+              <p className="grid__item__label">{label}</p>
             </div>
           </li>
         ))}
       </StyledGrid>
     ) : (
-      <p className="empty">Nothing to show here</p>
+      <p className="empty">No artists to show here</p>
     )}
   </>
 )

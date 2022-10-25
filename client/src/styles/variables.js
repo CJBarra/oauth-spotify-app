@@ -10,7 +10,9 @@ const variables = css`
     --light-grey: #737373;
     
     /* font */
-    --font: 'Roboto', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
     --font-black: #0a0a0a;
     --font-light-grey: #adadad;
     --font-white: #eeeeee;
@@ -29,3 +31,5 @@ const variables = css`
   }
 `
 export default variables;
+
+ 

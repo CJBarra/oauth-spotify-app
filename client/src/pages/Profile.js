@@ -1,14 +1,27 @@
 import { useEffect, useState } from 'react'
 
-import { getCurrentUserPlaylists, getCurrentUserProfile, getTopArtists } from '../spotify'
+import {
+  getCurrentUserFollowing,
+  getCurrentUserPlaylists,
+  getCurrentUserProfile,
+  getTopArtists,
+  getTopTracks
+} from '../spotify'
+import {
+  ArtistsGrid,
+  SectionWrapper,
+  TrackList,
+  PlaylistsGrid
+} from '../components'
 import { catchErrors } from '../utils'
-import { ArtistsGrid, SectionWrapper } from '../components'
 import { StyledHeader } from '../styles'
 
 const Profile = () => {
   const [profile, setProfile] = useState(null)
   const [playlists, setPlaylists] = useState(null);
   const [topArtists, setTopArtists] = useState(null);
+  const [topTracks, setTopTracks] = useState(null);
+  const [following, setFollowing] = useState(null);
 
   useEffect(() => {
     // await response from getCurrentUserProfile, then, set setProfile state variable
@@ -21,10 +34,18 @@ const Profile = () => {
 
       const userTopArtists = await getTopArtists();
       setTopArtists(userTopArtists.data);
+
+      const userTopTracks = await getTopTracks();
+      setTopTracks(userTopTracks.data);
+
+      const userFollowing = await getCurrentUserFollowing();
+      setFollowing(userFollowing.data)
     }
 
     catchErrors(fetchData())
   }, [])
+
+
 
   return (
     <>
@@ -53,10 +74,22 @@ const Profile = () => {
         </>
       )}
 
-      {topArtists && (
+      {topArtists && topTracks && playlists && following && (
         <main>
           <SectionWrapper title="Top artists this month" seeAllLink="/top-artists">
-            <ArtistsGrid artists={topArtists.items.slice(0, 10)} />
+            <ArtistsGrid artists={topArtists.items.slice(0, 10)} label='Artist' />
+          </SectionWrapper>
+
+          <SectionWrapper title="Top tracks this month" seeAllLink='/top-tracks'>
+            <TrackList tracks={topTracks.items.slice(0, 5)} />
+          </SectionWrapper>
+
+          <SectionWrapper title="Playlists" seeAllLink='/playlists'>
+            <PlaylistsGrid playlists={playlists.items.slice(0, 10)} />
+          </SectionWrapper>
+
+          <SectionWrapper title="Following" seeAllLink='/following'>
+            <ArtistsGrid artists={following.artists.items.slice(0, 10)} label='Profile' />
           </SectionWrapper>
         </main>
       )}

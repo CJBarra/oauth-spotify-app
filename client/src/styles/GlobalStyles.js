@@ -20,13 +20,18 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     overflow-x: hidden;
+
+    font-family: var(--font);
     color: var(--font-black);
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   h1, h2, h3, h4, h5, h6 {
     margin: 0 0 var(--sm);
-    letter-spacing: -0.02em;
     color: var(--font-white);
+    letter-spacing: -0.02em;
   }
 
   a, button {

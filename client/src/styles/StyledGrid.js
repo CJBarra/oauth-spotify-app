@@ -1,27 +1,30 @@
 import styled from "styled-components/macro";
 
 const StyledGrid = styled.ul`
+  list-style: none;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(192px, 1fr));
-  grid-gap: var(--md);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: 1fr;
+  grid-auto-rows: 0;
+  grid-gap: 0 var(--md);
   margin: 0;
   padding: 0;
-  list-style: none;
+  overflow-y: hidden;
 
   @media (min-width: 768px) {
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    grid-gap: var(--lg);
+    grid-template-columns: repeat(auto-fill, minmax(179px, 1fr));
+    grid-gap: 0 var(--lg);
   }
 
   .grid__item {
     background-color: var(--dark-grey-faded);
     border-radius: var(--rad-rounded);
-    transition: background-color 0.3s ease;
+    transition: background-color 250ms ease;
     cursor: pointer;
 
     &:hover,
     &:focus {
-      background-color: var(--dark-grey);
+      background-color: var(--mid-grey);
 
       img {
         box-shadow: 0 8px 24px rgb(0 0 0 / 50%);
@@ -70,8 +73,9 @@ const StyledGrid = styled.ul`
     letter-spacing: normal;
   }
 
-  .grid__item_label {
-    font-size: var(--sm);
+  .grid__item__label {
+    font-size: 0.85rem;
+    font-weight: 600;
     color: var(--font-light-grey);
   }
 `

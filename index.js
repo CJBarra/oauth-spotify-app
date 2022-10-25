@@ -48,6 +48,7 @@ app.get('/login', (req, res) => {
     'user-read-email',
     'playlist-read-private',
     'user-top-read',
+    'user-follow-read',
   ].join(' ');
 
   // redirect to Spotify Accounts Service for login
