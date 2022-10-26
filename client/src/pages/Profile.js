@@ -57,7 +57,7 @@ const Profile = () => {
                 <img className='header__img' src={profile.images[0].url} alt='Avatar' />
               )}
 
-              <div>
+              <div className='header__user__profile-group'>
                 <div className='header__overline'>Profile</div>
                 <h1 className='header__name'>{profile.display_name}</h1>
                 <p className='header__meta'>
@@ -77,7 +77,10 @@ const Profile = () => {
       {topArtists && topTracks && playlists && following && (
         <main>
           <SectionWrapper title="Top artists this month" seeAllLink="/top-artists">
-            <ArtistsGrid artists={topArtists.items.slice(0, 10)} label='Artist' />
+            <ArtistsGrid
+              artists={topArtists.items.slice(0, 10)}
+              label='Artist'
+              style={{ gridAutoRows: '0', gridGap: '0 var(--md)' }} />
           </SectionWrapper>
 
           <SectionWrapper title="Top tracks this month" seeAllLink='/top-tracks'>
@@ -85,11 +88,16 @@ const Profile = () => {
           </SectionWrapper>
 
           <SectionWrapper title="Playlists" seeAllLink='/playlists'>
-            <PlaylistsGrid playlists={playlists.items.slice(0, 10)} />
+            <PlaylistsGrid
+              playlists={playlists.items.slice(0, 10)}
+              style={{ gridAutoRows: '0', gridGap: '0 var(--md)' }} />
           </SectionWrapper>
 
           <SectionWrapper title="Following" seeAllLink='/following'>
-            <ArtistsGrid artists={following.artists.items.slice(0, 10)} label='Profile' />
+            <ArtistsGrid
+              artists={following.artists.items.slice(0, 10)}
+              label='Profile'
+              style={{ gridAutoRows: '0', gridGap: '0 var(--md)' }} />
           </SectionWrapper>
         </main>
       )}

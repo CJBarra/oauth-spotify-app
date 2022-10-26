@@ -1,7 +1,7 @@
 import styled from "styled-components/macro";
 
 const StyledHeader = styled.header`
-  background: linear-gradient(transparent, var(--dark-grey-faded));
+  background: linear-gradient(rgba(30, 230, 101, 0.9), rgba(30, 230, 101, 0.4));
   background-color: var(--mid-grey);
   position: relative;
   display: flex;
@@ -9,16 +9,17 @@ const StyledHeader = styled.header`
   height: 30vh;
   max-height: 500px;
   min-height: 250px;
+  margin-bottom: var(--lg);
   color: var(--font-white);
 
   @media (min-width: 768px) {
-    min-height: 340px;
+    /* min-height: 33vh; */
   }
 
   &:after {
     content: '';
     background-color: var(--mid-grey);
-    background-image: linear-gradient(var(--dark-grey-faded), rgba(0, 0, 0, 1));
+    background-image: linear-gradient(rgba(30, 230, 101, 0.4), rgba(25, 25, 25, 0.9));
     position: absolute;
     display: block;
     top: 100%;
@@ -29,54 +30,57 @@ const StyledHeader = styled.header`
 
   .header__inner {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     width: 100%;
     max-width: var(--site-max-width);
     margin: 0 auto;
-    padding: var(--lg) var(--md);
+    padding: var(--lg) var(--md) 0;
 
     @media (min-width: 768px) {
-      padding: var(--lg) 64px;
+      padding: var(--lg) var(--lg) 0;
     }
   }
 
   img.header__img {
     background-color: var(--dark-grey);
     width: 100%;
-    max-width: 192px;
+    max-width: 160px;
     min-width: 120px;
     margin-right: var(--lg);
     box-shadow: 0 4px 60px rgb(0 0 0 / 50%);
     border-radius: ${props => props.type === 'user' ? '50%' : 0};
 
-    @media (min-width: 768px) {
-      margin-right: var(--xl);
+    &:hover, &:focus {
+      cursor: pointer;
     }
+  }
+
+  .header__user__profile-group {
+    cursor: default;
   }
 
   .header__overline {
     text-transform: uppercase;
-    font-size: 0.76rem;
-    font-weight: 600;
+    font-size: 0.65rem;
+    font-weight: 700;
     margin-bottom: var(--xs);
   }
 
   h1.header__name {
-    font-size: clamp(2.5rem, 10vw, 6rem);
+    font-size: clamp(2.5rem, 9vw, 6rem);
     line-height: 1;
     margin: 0 0 var(--xs) 0;
 
     @media (min-width: 768px) {
-      margin: 0 0 var(--xs) -5px;
+      margin: 0 0 var(--lg) -5px;
     }
   }
 
   .header__meta {
     display: flex;
     align-items: center;
-    font-size: 0.88rem;
-    color: var(--font-light-grey);
-    font-weight: 400;
+    font-size: 0.8rem;
+    font-weight: 600;
     margin: 0;
 
     span {
@@ -87,7 +91,6 @@ const StyledHeader = styled.header`
         content: '•';
         display: block;
         margin: 0 var(--xs);
-        color: var(--font-light-grey);
         font-size: 0.5rem;
       }
     }

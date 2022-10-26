@@ -6,7 +6,14 @@ import { accessToken, logout } from './spotify';
 import { GlobalStyle } from './styles';
 
 // pages
-import { Login, PlaylistById, Playlists, Profile, TopArtists, TopTracks } from './pages';
+import {
+  Login,
+  Profile,
+  TopArtists,
+  TopTracks,
+  PlaylistById,
+  Playlists,
+} from './pages';
 
 
 function ScrollToTop() {
@@ -30,7 +37,7 @@ function App() {
   return (
     <div className="App">
       <GlobalStyle />
-      <header className="App-header">
+      <div className="App-header">
         {!token ? (
           <Login />
         ) : (
@@ -49,7 +56,7 @@ function App() {
             </BrowserRouter>
           </>
         )}
-      </header>
+      </div>
     </div>
   );
 }
@@ -57,7 +64,7 @@ export default App;
 
 
 const StyledLogoutButton = styled.button`
-  background-color: var(--dark-grey);
+  background-color: rgba(0, 0, 0, 0.6);
   position: absolute;
   top: var(--sm);
   right: var(--md);

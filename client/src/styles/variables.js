@@ -2,10 +2,10 @@ import { css } from "styled-components/macro";
 
 const variables = css`
   :root {
-    --accent-highlight: #1ee665;
-    --accent-color: #1ed760;
+    --accent-highlight: #1ee665; // rgb(30, 230, 101)
+    --accent-color: rgba(0, 215, 96, 0.85); // rgb(30, 215, 96)
     --dark-grey: #191919; // background-color (REF: rgb(25, 25, 25)).
-    --dark-grey-faded: rgba(16, 16, 16, 0.9);
+    --darker-grey-faded: rgba(16, 16, 16, 0.9);
     --mid-grey: #414141;
     --light-grey: #737373;
     
@@ -32,4 +32,3 @@ const variables = css`
 `
 export default variables;
 
- 

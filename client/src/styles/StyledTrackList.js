@@ -14,7 +14,7 @@ const StyledTrackList = styled.ul`
     border-radius: var(--rad-rounded);
 
     color: var(--font-light-grey);
-    font-size: 0.833rem;
+    font-size: 0.7rem;
     font-weight: 600;
     transition: background-color 250ms ease;
 
@@ -34,13 +34,13 @@ const StyledTrackList = styled.ul`
     justify-content: flex-end;
     align-items: center;
 
-    font-size: 1rem;
+    font-size: 0.8rem;
     font-variant-numeric: tabular-nums;
     overflow: visible;
   }
 
   .track__item__name-artist {
-    align-self: flex-end;
+    align-self: stretch;
   }
   
   .track__item__title-group {
@@ -49,16 +49,16 @@ const StyledTrackList = styled.ul`
   }
 
   .track__item__img {
-    background-color: var(--dark-grey-faded);
+    background-color: var(--darker-grey-faded);
     margin-right: var(--sm);
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
     flex-shrink: 0;
   }
 
   .track__item__name {
     color: var(--font-white);
-    font-size: 0.925rem;
+    font-size: 0.8rem;
   }
 
   .track__item__artist {

@@ -1,9 +1,9 @@
 import { StyledGrid } from '../styles';
 
-const ArtistsGrid = ({ artists, label }) => (
+const ArtistsGrid = ({ artists, label, style }) => (
   <>
     {artists && artists.length ? (
-      <StyledGrid type="artist">
+      <StyledGrid type="artist" style={style}>
         {artists.map((artist, i) => (
           <li className="grid__item" key={i}>
             <div className="grid__item__inner">

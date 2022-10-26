@@ -44,18 +44,21 @@ const GlobalStyle = createGlobalStyle`
   }
 
   button {
-    background-color: var(--dark-grey-faded);
+    background-color: var(--darker-grey-faded);
     border: 0;
     border-radius: var(--lg);
     padding: var(--xs) var(--sm);
     font-weight: 600;
     font-family: inherit;
     color: var(--font-white);
+    transition: all 240ms ease;
 
     &:hover, &:focus {
+      cursor: pointer;
       background-color: var(--mid-grey);
       outline: 0;
     }
+
   }
 
   img {

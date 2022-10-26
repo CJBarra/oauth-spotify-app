@@ -15,7 +15,7 @@ const StyledSection = styled.section`
     padding: var(--lg) var(--md);
 
     @media (min-width: 768px) {
-      padding: var(--lg) 64px;
+      padding: var(--lg) var(--lg) 0;
     }
   }
 
@@ -29,23 +29,25 @@ const StyledSection = styled.section`
   .section__heading {
     display: flex;
     margin: 0;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
 
-    &:hover, &:focus {
-      text-decoration: underline;
+    a{
+      &:hover, &:focus {
+        text-decoration: underline;
+      }
     }
   }
 
   .section__breadcrumb {
     display: flex;
     color: var(--font-light-grey);
-
+    
     &::after {
       content: '/';
       display: block;
       margin: 0 var(--sm);
     }
-
+    
     a {
       &:hover, &:focus {
         color: var(--font-white);
@@ -57,7 +59,7 @@ const StyledSection = styled.section`
     display: flex;
     align-items: flex-end;
     text-transform: uppercase;
-    color: var(--light-grey);
+    color: var(--font-light-grey);
     font-size: 0.7rem;
     font-weight: 700;
     letter-spacing: 0.1em;
