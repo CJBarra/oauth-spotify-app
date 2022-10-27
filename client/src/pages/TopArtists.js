@@ -10,8 +10,8 @@ const TopArtists = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const userTopArtists = await getTopArtists(`${activeRange}_term`);
-      setTopArtists(userTopArtists.data)
+      const { data } = await getTopArtists(`${activeRange}_term`);
+      setTopArtists(data)
     }
 
     catchErrors(fetchData())

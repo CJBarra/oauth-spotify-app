@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import {
   getCurrentUserFollowing,
@@ -23,26 +23,32 @@ const Profile = () => {
   const [topTracks, setTopTracks] = useState(null);
   const [following, setFollowing] = useState(null);
 
+  // initial render cycle ref, prevents double useEffect() renders when mounting / unmounting
+  const initialRender = useRef(true);
+
   useEffect(() => {
-    // await response from getCurrentUserProfile, then, set setProfile state variable
-    const fetchData = async () => {
-      const userProfile = await getCurrentUserProfile();
-      setProfile(userProfile.data);
+    if (initialRender.current) {
+      initialRender.current = false;
+      // await response from getCurrentUserProfile, then, set setProfile state variable
+      const fetchData = async () => {
+        const userProfile = await getCurrentUserProfile();
+        setProfile(userProfile.data);
 
-      const userPlaylists = await getCurrentUserPlaylists();
-      setPlaylists(userPlaylists.data);
+        const userPlaylists = await getCurrentUserPlaylists();
+        setPlaylists(userPlaylists.data);
 
-      const userTopArtists = await getTopArtists();
-      setTopArtists(userTopArtists.data);
+        const userTopArtists = await getTopArtists();
+        setTopArtists(userTopArtists.data);
 
-      const userTopTracks = await getTopTracks();
-      setTopTracks(userTopTracks.data);
+        const userTopTracks = await getTopTracks();
+        setTopTracks(userTopTracks.data);
 
-      const userFollowing = await getCurrentUserFollowing();
-      setFollowing(userFollowing.data)
+        const userFollowing = await getCurrentUserFollowing();
+        setFollowing(userFollowing.data)
+      }
+
+      catchErrors(fetchData())
     }
-
-    catchErrors(fetchData())
   }, [])
 
 

@@ -19,7 +19,7 @@ const StyledHeader = styled.header`
   &:after {
     content: '';
     background-color: var(--mid-grey);
-    background-image: linear-gradient(rgba(30, 230, 101, 0.4), rgba(25, 25, 25, 0.9));
+    background-image: linear-gradient(rgba(30, 230, 101, 0.4), rgba(25, 25, 25, 1));
     position: absolute;
     display: block;
     top: 100%;
