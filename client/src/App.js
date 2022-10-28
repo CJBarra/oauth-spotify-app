@@ -44,12 +44,12 @@ function App() {
           <>
             <StyledLogoutButton onClick={logout}>Log Out</StyledLogoutButton>
 
-            <BrowserRouter >
+            <BrowserRouter>
               <ScrollToTop />
               <Routes>
                 <Route path='/top-artists' element={<TopArtists />} />
                 <Route path='/top-tracks' element={<TopTracks />} />
-                <Route path='/playlist/:id' element={<PlaylistById />} />
+                <Route path='/playlists/:id' element={<PlaylistById />} />
                 <Route path='/playlists' element={<Playlists />} />
                 <Route path='/' element={<Profile />} />
               </Routes>
@@ -68,10 +68,11 @@ const StyledLogoutButton = styled.button`
   position: absolute;
   top: var(--sm);
   right: var(--md);
-  padding: var(--xs) var(--sm);
+  padding: 6px var(--sm);
   z-index: 10;
 
-  font-size: 14px;
+  color: var(--font-white);
+  font-size: 0.8rem;
 
   @media (min-width: 768px) {
     right: var(--lg);

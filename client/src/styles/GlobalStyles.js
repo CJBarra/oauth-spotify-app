@@ -70,6 +70,10 @@ const GlobalStyle = createGlobalStyle`
   main {
     position: relative;
     padding: 60px 0;
+    background-color: rgba(16, 16, 16, 0.15);
+  }
+  
+  .mainMask {
   }
 
   .app {
@@ -84,6 +88,25 @@ const GlobalStyle = createGlobalStyle`
     text-overflow: ellipsis;
     white-space: unset;
     word-break: break-all;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .empty {
+    color: var(--grey);
+    font-size: var(--fz-lg);
+    text-align: center;
+    padding: var(--spacing-xxl);
   }
 `
 export default GlobalStyle

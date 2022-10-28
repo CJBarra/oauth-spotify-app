@@ -6,6 +6,7 @@ import { getCurrentUserPlaylists } from "../spotify";
 import { PlaylistsGrid, SectionWrapper } from "../components";
 
 const Playlists = () => {
+  // state variables
   const [playlistsData, setPlaylistsData] = useState(null); // Spotify API endpoint response
   const [playlists, setPlaylists] = useState(null); // Rendered playlist array
 
@@ -14,16 +15,18 @@ const Playlists = () => {
    *  due to change in React 18: useRef() used to addresses double render
    *  issue due to useEffect()  that has components mount , un-mount , and then re-mount. 
    **/
-  const initialRender = useRef(true);
+  const initRender = useRef(true);
 
   useEffect(() => {
-    if (initialRender.current) {
-      initialRender.current = false;
+    if (initRender.current) {
+      initRender.current = false;
 
       const fetchData = async () => {
+        // fetch data from getCurrentUserPlaylists endpoint
         const { data } = await getCurrentUserPlaylists();
         setPlaylistsData(data);
       }
+
       catchErrors(fetchData());
     }
   }, [])
@@ -33,14 +36,12 @@ const Playlists = () => {
   useEffect(() => {
     if (!playlistsData) { return }
 
-    // console.log(playlistsData.next);
-
     // Spotify playlist endpoint returns default limit of 20 playlists.
-    const fetchMorePlaylists = async () => {
-      // if more playlists exist, check '.next' pagingObject for more.
+    const fetchMoreData = async () => {
+      // if more playlists exist, check pagingObject for more.
       if (playlistsData.next && playlistsData.next !== null) {
         const { data } = await axios.get(playlistsData.next);
-        // setPlaylistData with batch of 20 playlists
+
         setPlaylistsData(data);
       }
     };
@@ -57,10 +58,8 @@ const Playlists = () => {
       ]
     ));
 
-    // fetch additional next batch of playlists (limit = 20) if needed.
-    catchErrors(fetchMorePlaylists());
-
-
+    // fetch additional playlists (limit = 20) as needed.
+    catchErrors(fetchMoreData());
   }, [playlistsData])
 
 
