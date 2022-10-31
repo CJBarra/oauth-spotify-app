@@ -1,9 +1,9 @@
-require('dotenv').config()
 const express = require("express")
 const axios = require('axios')
 const querystring = require('node:querystring')
 const app = express()
 const path = require('path')
+require('dotenv').config()
 
 // env variables
 const CLIENT_ID = process.env.CLIENT_ID
@@ -93,7 +93,7 @@ app.get('/callback', (req, res) => {
         })
 
         // pass access and refresh tokens from Spotify Account Service in query params
-        res.redirect(`http://${FRONTEND_URI}/?${queryParams}`)
+        res.redirect(`${FRONTEND_URI}/?${queryParams}`)
 
       } else {
         res.redirect(`/?${querystring.stringify({ error: 'invalid token' })}`)
@@ -134,5 +134,5 @@ app.get('*', (req, res) => {
 
 
 app.listen(PORT, () => {
-  console.log(`Express listening... http://localhost:${PORT}`)
+  console.log(`Express listening at... http://localhost:${PORT}`)
 })
