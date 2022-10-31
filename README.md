@@ -2,6 +2,8 @@
 
 Creating a Spotify API connected app that will display a user's Profile data.
 
+![app image](client/public/og.png)
+
 ## Setup & Installation
 
 1. Register your app in your [Spotify Developer Dashboard](https://developer.spotify.com/dashboard/).
