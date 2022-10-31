@@ -1,15 +1,19 @@
 require('dotenv').config()
 const express = require("express")
 const axios = require('axios')
-const querystring = require('node:querystring');
+const querystring = require('node:querystring')
 const app = express()
-const port = 8000
+const path = require('path')
 
 // env variables
 const CLIENT_ID = process.env.CLIENT_ID
 const CLIENT_SECRET = process.env.CLIENT_SECRET
 const REDIRECT_URI = process.env.REDIRECT_URI
+const FRONTEND_URI = process.env.REDIRECT_URI
+const PORT = process.env.PORT || 8000
 
+// Priority Serve static files
+app.use(express.static(path.resolve(__dirname, './client/build')));
 
 // utils
 const generateRandomString = length => {
@@ -43,7 +47,7 @@ app.get('/login', (req, res) => {
    * https://developer.spotify.com/documentation/general/guides/authorization/scopes/#playlist-read-private
    * @param {string}
    */
-   const scope = [
+  const scope = [
     'user-read-private',
     'user-read-email',
     'playlist-read-private',
@@ -89,7 +93,7 @@ app.get('/callback', (req, res) => {
         })
 
         // pass access and refresh tokens from Spotify Account Service in query params
-        res.redirect(`http://localhost:3000/?${queryParams}`)
+        res.redirect(`http://${FRONTEND_URI}/?${queryParams}`)
 
       } else {
         res.redirect(`/?${querystring.stringify({ error: 'invalid token' })}`)
@@ -123,8 +127,12 @@ app.get('/refresh_token', (req, res) => {
     })
 })
 
+// handle requests express cannot with React app
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, './client/build', 'index.html'));
+})
 
 
-app.listen(port, () => {
-  console.log(`Express listening... http://localhost:${port}`)
+app.listen(PORT, () => {
+  console.log(`Express listening... http://localhost:${PORT}`)
 })
