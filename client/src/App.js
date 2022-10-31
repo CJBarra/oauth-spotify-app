@@ -13,6 +13,7 @@ import {
   TopTracks,
   PlaylistById,
   Playlists,
+  Following,
 } from './pages';
 
 
@@ -47,6 +48,7 @@ function App() {
             <BrowserRouter>
               <ScrollToTop />
               <Routes>
+                <Route path='/following' element={<Following />} />
                 <Route path='/top-artists' element={<TopArtists />} />
                 <Route path='/top-tracks' element={<TopTracks />} />
                 <Route path='/playlists/:id' element={<PlaylistById />} />

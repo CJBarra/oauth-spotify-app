@@ -70,10 +70,14 @@ const GlobalStyle = createGlobalStyle`
   main {
     position: relative;
     padding: 60px 0;
-    background-color: rgba(16, 16, 16, 0.15);
   }
   
   .mainMask {
+    background-image: linear-gradient(rgba(16, 16, 16, 0.15) 0, rgba(25, 25, 25, 1));
+    position: absolute;
+    width: 100%;
+    height: 264px;
+    margin-top: -64px;
   }
 
   .app {

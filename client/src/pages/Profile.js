@@ -11,7 +11,8 @@ import {
   ArtistsGrid,
   SectionWrapper,
   TrackList,
-  PlaylistsGrid
+  PlaylistsGrid,
+  Loader
 } from '../components'
 import { catchErrors } from '../utils'
 import { StyledHeader } from '../styles'
@@ -80,8 +81,9 @@ const Profile = () => {
         </>
       )}
 
-      {topArtists && topTracks && playlists && following && (
-        <main className='mainMask'>
+      {topArtists && topTracks && playlists && following ? (
+        <main className=''>
+          <div className='mainMask' />
           <SectionWrapper title="Top artists this month" seeAllLink="/top-artists">
             <ArtistsGrid
               artists={topArtists.items.slice(0, 10)}
@@ -106,7 +108,7 @@ const Profile = () => {
               style={{ gridAutoRows: '0', gridGap: '0 var(--md)' }} />
           </SectionWrapper>
         </main>
-      )}
+      ): <Loader />}
     </>
   )
 };

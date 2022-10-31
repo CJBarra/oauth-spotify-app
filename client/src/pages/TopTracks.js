@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { SectionWrapper, TimeRangeChips, TrackList } from "../components";
+import { Loader, SectionWrapper, TimeRangeChips, TrackList } from "../components";
 
 import { getTopTracks } from "../spotify";
 import { catchErrors } from "../utils";
@@ -24,9 +24,9 @@ const TopTracks = () => {
         <SectionWrapper title='Top tracks' breadcrumb='true'>
           <TimeRangeChips activeRange={activeRange} setActiveRange={setActiveRange} />
 
-          {topTracks && (
+          {topTracks ? (
             <TrackList tracks={topTracks.items.slice(0, 20)} />
-          )}
+          ) : <Loader />}
         </SectionWrapper>
       </main>
     </>

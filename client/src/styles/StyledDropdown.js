@@ -44,6 +44,7 @@ const StyledDropdown = styled.div`
     option {
       background-color: var(--darker-grey-faded);
     }
+
   }
 `
 

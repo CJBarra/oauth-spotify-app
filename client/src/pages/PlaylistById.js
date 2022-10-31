@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom"
 
 import { getPlaylistById, getAudioFeaturesForTracks } from "../spotify"
 import { catchErrors } from "../utils";
-import { SectionWrapper, TrackList } from "../components";
+import { Loader, SectionWrapper, TrackList } from "../components";
 import { StyledDropdown, StyledHeader } from "../styles";
 
 
@@ -150,7 +150,8 @@ const PlaylistById = () => {
             </div>
           </StyledHeader>
 
-          <main className="mainMask">
+          <main>
+            <div className="mainMask" />
             <SectionWrapper title="Playlist" breadcrumb={true}>
               <StyledDropdown active={!!sortValue}>
                 <label className='sr-only' htmlFor='order-select'>Custom order</label>
@@ -169,9 +170,9 @@ const PlaylistById = () => {
                 </select>
               </StyledDropdown>
 
-              {sortTracksByAudioFeatures && (
+              {sortTracksByAudioFeatures ? (
                 <TrackList tracks={sortTracksByAudioFeatures} />
-              )}
+              ) : <Loader />}
             </SectionWrapper>
           </main>
 

@@ -3,7 +3,7 @@ import axios from "axios";
 
 import { catchErrors } from "../utils";
 import { getCurrentUserPlaylists } from "../spotify";
-import { PlaylistsGrid, SectionWrapper } from "../components";
+import { Loader, PlaylistsGrid, SectionWrapper } from "../components";
 
 const Playlists = () => {
   // state variables
@@ -67,9 +67,9 @@ const Playlists = () => {
     <>
       <main>
         <SectionWrapper title='Public Playlists' breadcrumb='true'>
-          {playlists && (
+          {playlists ? (
             <PlaylistsGrid playlists={playlists} />
-          )}
+          ) : <Loader />}
         </SectionWrapper>
       </main>
     </>
