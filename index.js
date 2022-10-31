@@ -93,7 +93,7 @@ app.get('/callback', (req, res) => {
         })
 
         // pass access and refresh tokens from Spotify Account Service in query params
-        res.redirect(`${FRONTEND_URI}/?${queryParams}`)
+        res.redirect(`${FRONTEND_URI}?${queryParams}`)
 
       } else {
         res.redirect(`/?${querystring.stringify({ error: 'invalid token' })}`)
