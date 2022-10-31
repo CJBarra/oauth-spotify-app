@@ -3,7 +3,7 @@ import { css } from "styled-components/macro";
 const variables = css`
   :root {
     --accent-highlight: #1ee665; // rgb(30, 230, 101)
-    --accent-color: rgba(0, 215, 96, 0.85); // rgb(30, 215, 96)
+    --accent-color: #00c257; // rgb(0, 215, 96)
     --dark-grey: #191919; // background-color (REF: rgb(25, 25, 25)).
     --darker-grey-faded: rgba(16, 16, 16, 0.9);
     --mid-grey: #414141;

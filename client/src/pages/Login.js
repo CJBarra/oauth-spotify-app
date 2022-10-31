@@ -11,7 +11,7 @@ const StyledLoginContainer = styled.main`
 const StyledLoginButton = styled.a`
   background-color: var(--accent-color);
   display: inline-block;
-  max-width: 450px;
+  max-width: 350px;
   width: 100%;
   padding: var(--sm) var(--lg);
   margin: var(--lg) auto;
@@ -24,7 +24,6 @@ const StyledLoginButton = styled.a`
   text-align: center;
 
   &:hover, &:focus {
-    /* background-color: var(--accent-highlight); */
     filter: brightness(1.2);
   }
 `
@@ -33,7 +32,7 @@ const Login = () => {
   return (
     <StyledLoginContainer>
       <StyledLoginButton href="http://localhost:8000/login">
-        Log in
+        Log in to spotify
       </StyledLoginButton>
     </StyledLoginContainer>
   )
