@@ -65,6 +65,7 @@ app.get('/login', (req, res) => {
   }))
 })
 
+
 app.get('/callback', (req, res) => {
   const code = req.query.code || null;
 
@@ -104,6 +105,7 @@ app.get('/callback', (req, res) => {
     })
 })
 
+
 app.get('/refresh_token', (req, res) => {
   const { refresh_token } = req.query
 
@@ -126,6 +128,7 @@ app.get('/refresh_token', (req, res) => {
       res.send(error)
     })
 })
+
 
 // handle requests express cannot with React app
 app.get('*', (req, res) => {
