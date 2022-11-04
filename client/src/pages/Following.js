@@ -1,18 +1,23 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { ArtistsGrid, Loader, SectionWrapper } from "../components"
 import { getCurrentUserFollowing } from "../spotify";
 import { catchErrors } from "../utils";
 
 const Following = () => {
   const [following, setFollowing] = useState(null);
+  const initialRender = useRef(false);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const { data } = await getCurrentUserFollowing();
-      setFollowing(data)
-    }
+    if (initialRender.current === false) {
 
-    catchErrors(fetchData())
+      const fetchData = async () => {
+        const { data } = await getCurrentUserFollowing();
+        setFollowing(data)
+      }
+
+      catchErrors(fetchData())
+    }
+    return () => initialRender.current = true;
   }, [])
 
   return (

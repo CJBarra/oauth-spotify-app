@@ -25,11 +25,10 @@ const Profile = () => {
   const [following, setFollowing] = useState(null);
 
   // initial render cycle ref, prevents double useEffect() renders when mounting / unmounting
-  const initialRender = useRef(true);
+  const initialRender = useRef(false);
 
   useEffect(() => {
-    if (initialRender.current) {
-      initialRender.current = false;
+    if (initialRender.current === false) {
       // await response from getCurrentUserProfile, then, set setProfile state variable
       const fetchData = async () => {
         const userProfile = await getCurrentUserProfile();
@@ -50,6 +49,8 @@ const Profile = () => {
 
       catchErrors(fetchData())
     }
+    
+    return () => initialRender.current = true;
   }, [])
 
 
@@ -108,7 +109,7 @@ const Profile = () => {
               style={{ gridAutoRows: '0', gridGap: '0 var(--md)' }} />
           </SectionWrapper>
         </main>
-      ): <Loader />}
+      ) : <Loader />}
     </>
   )
 };

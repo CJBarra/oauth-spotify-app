@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import { TimeRangeChips, ArtistsGrid, SectionWrapper, Loader } from '../components';
 import { getTopArtists } from '../spotify';
@@ -7,14 +7,20 @@ import { catchErrors } from '../utils';
 const TopArtists = () => {
   const [topArtists, setTopArtists] = useState(null);
   const [activeRange, setActiveRange] = useState('short')
+  const initialRender = useRef(false);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const { data } = await getTopArtists(`${activeRange}_term`);
-      setTopArtists(data)
+    if (initialRender.current === false) {
+
+      const fetchData = async () => {
+        const { data } = await getTopArtists(`${activeRange}_term`);
+        setTopArtists(data)
+      }
+
+      catchErrors(fetchData())
     }
 
-    catchErrors(fetchData())
+    return () => initialRender.current = true;
   }, [activeRange])
 
 

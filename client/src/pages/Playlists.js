@@ -13,29 +13,29 @@ const Playlists = () => {
   /**
    *  initial render cycle ref: 
    *  due to change in React 18: useRef() used to addresses double render
-   *  issue due to useEffect()  that has components mount , un-mount , and then re-mount. 
+   *  issue on initial page render due to useEffect() that has components mount , un-mount , and then re-mount. 
    **/
-  const initRender = useRef(true);
+  const initialRender = useRef(false);
 
   useEffect(() => {
-    if (initRender.current) {
-      initRender.current = false;
+    if (initialRender.current === false) {
 
+      // fetch data from getCurrentUserPlaylists endpoint
       const fetchData = async () => {
-        // fetch data from getCurrentUserPlaylists endpoint
         const { data } = await getCurrentUserPlaylists();
         setPlaylistsData(data);
       }
 
       catchErrors(fetchData());
     }
+
+    return () => initialRender.current = true;
   }, [])
 
 
   // On playlistData update, check for additional playlists to be fetched update state as needed.
   useEffect(() => {
     if (!playlistsData) { return }
-
     // Spotify playlist endpoint returns default limit of 20 playlists.
     const fetchMoreData = async () => {
       // if more playlists exist, check pagingObject for more.
@@ -57,9 +57,9 @@ const Playlists = () => {
         ...playlistsData.items
       ]
     ));
-
     // fetch additional playlists (limit = 20) as needed.
     catchErrors(fetchMoreData());
+
   }, [playlistsData])
 
 

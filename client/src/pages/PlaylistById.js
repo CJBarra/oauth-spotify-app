@@ -19,15 +19,14 @@ const PlaylistById = () => {
   const [audioFeatures, setAudioFeatures] = useState(null);
   const [sortValue, setSortValue] = useState('');
 
-  const initRender = useRef(true);
+  const initRender = useRef(false);
 
   const sortOptions = ['danceability', 'tempo', 'energy'];
 
   // initial render
   useEffect(() => {
-    if (initRender.current) {
-      initRender.current = false;
-
+    if (initRender.current === false) {
+      
       const fetchData = async () => {
         // pass :id from URL to getPlaylistById endpoint
         const { data } = await getPlaylistById(id)
@@ -35,9 +34,11 @@ const PlaylistById = () => {
         setPlaylist(data);
         setTracksData(data.tracks);
       }
-
+      
       catchErrors(fetchData());
     }
+    
+    return () => initRender.current = true;
   }, [id])
 
 

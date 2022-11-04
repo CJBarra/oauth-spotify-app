@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Loader, SectionWrapper, TimeRangeChips, TrackList } from "../components";
 
 import { getTopTracks } from "../spotify";
@@ -8,14 +8,20 @@ import { catchErrors } from "../utils";
 const TopTracks = () => {
   const [topTracks, setTopTracks] = useState(null);
   const [activeRange, setActiveRange] = useState('short');
+  const initialRender = useRef(false);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const { data } = await getTopTracks(`${activeRange}_term`);
-      setTopTracks(data)
+    if (initialRender.current === false) {
+
+      const fetchData = async () => {
+        const { data } = await getTopTracks(`${activeRange}_term`);
+        setTopTracks(data)
+      }
+
+      catchErrors(fetchData())
     }
 
-    catchErrors(fetchData())
+    return () => initialRender.current = true
   }, [activeRange])
 
   return (
