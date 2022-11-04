@@ -8,9 +8,16 @@ import { catchErrors } from "../utils";
 const TopTracks = () => {
   const [topTracks, setTopTracks] = useState(null);
   const [activeRange, setActiveRange] = useState('short');
-  const initialRender = useRef(false);
+  const [renderState, setRenderState] = useState(false);
+
+  const initialRender = useRef(renderState ? (`${renderState}`) : false);
 
   useEffect(() => {
+    // check if render is needed for time range change
+    if (renderState === true) {
+      initialRender.current = false
+    }
+
     if (initialRender.current === false) {
 
       const fetchData = async () => {
@@ -22,13 +29,17 @@ const TopTracks = () => {
     }
 
     return () => initialRender.current = true
-  }, [activeRange])
+  }, [activeRange, renderState])
 
   return (
     <>
       <main>
         <SectionWrapper title='Top tracks' breadcrumb='true'>
-          <TimeRangeChips activeRange={activeRange} setActiveRange={setActiveRange} />
+          <TimeRangeChips
+            activeRange={activeRange}
+            setActiveRange={setActiveRange}
+            setRenderState={setRenderState}
+          />
 
           {topTracks ? (
             <TrackList tracks={topTracks.items.slice(0, 20)} />
